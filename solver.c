@@ -2,45 +2,43 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern int** convertToInt();
-extern char** readInGrid(char * filename);
-extern void printGrid(char** grid);
+extern int* convertToInt();
+extern char * readInFile(char * filename, char grid[]);
+extern void printGrid(char* grid);
+extern int getNumberFromGrid(int row, int col, int * grid);
 
 int main(int argc, char * argv[]){
-
-
-	char ** grid = malloc(sizeof(char**));
 	
-	grid = readInGrid("puzzle.txt");
+	char grid[81];
 	
-	//printGrid(grid);
+	readInFile("puzzle.txt", grid);
+	
+	printGrid(grid);
 	
 
 	return 0;
 }
 
-int** convertToInt(){
+int* convertToInt(){
 
-	int ** newGrid;
+	int * newGrid;
 	
 	return newGrid;
 
 }
 
-char** readInGrid(char * filename){
-
-	char ** grid = malloc(sizeof(char[9][9]));
+char * readInFile(char * filename, char grid[]){
 
 	FILE * puzzle;
 	puzzle = fopen("puzzle.txt", "r");
 	char c;
 	for(int i = 0; i < 9; i++){
 		for(int j = 0; j < 9; j++){
-			while ((c = getc(puzzle)) != EOF){
-				printf("%c", c);
-				//grid[i][j] = c;
-  				//printf("%c",  grid[i][j]);
-  			}
+			c = getc(puzzle);
+			if(c == '\n')
+				c = getc(puzzle);
+			int index = ((i * 9) +j);
+			grid[index] = c;
   		}
   	}
   	
@@ -48,12 +46,21 @@ char** readInGrid(char * filename){
 
 }
 
-void printGrid(char** grid){
+void printGrid(char* grid){
 
 	for(int i = 0; i < 9; i++){
 		for(int j = 0; j < 9; j++){
-			printf("%c ", grid[i][j]);
+			int index = ((i * 9) +j);
+			printf("%c", grid[index]);
 		}
 		printf("\n");
 	}
+}
+
+int getNumberFromGrid(int row, int col, int * grid){
+	
+	int ret;
+	
+	return ret;
+	
 }
