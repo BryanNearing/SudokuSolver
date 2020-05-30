@@ -5,4 +5,4 @@ solver : solver.c
 	gcc -o solver solver.c
 
 clean:
-	rm *.o source core
+	rm solver
