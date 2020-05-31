@@ -20,7 +20,7 @@ int main(int argc, char * argv[]){
 	
 	printGrid(grid);
 	
-	bool result = inCollum(5, grid, 3);
+	bool result = inCollum(5, grid, 5);
 	
 	printf("\nResult: %d\n", result);
 
@@ -98,7 +98,7 @@ bool inCollum(int col, int grid[], int num){
 	int tempCol = col;
 
 	for(int i = 0; i < 9; i++){
-		if(grid[col] == num)
+		if(grid[tempCol] == num)
 			return true;
 		tempCol = tempCol + 9;
 	
