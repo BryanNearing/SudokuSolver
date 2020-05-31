@@ -20,9 +20,9 @@ int main(int argc, char * argv[]){
 	
 	printGrid(grid);
 	
-	//bool result = inRow(5, grid, 2);
+	bool result = inCollum(5, grid, 3);
 	
-	//printf("\nResult: %d\n", result);
+	printf("\nResult: %d\n", result);
 
 	return 0;
 }
