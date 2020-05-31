@@ -2,16 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 
-extern int* convertToInt();
-extern char * readInFile(char * filename, char grid[]);
-extern void printGrid(char* grid);
+extern void convertToInt();
+extern void readInFile(char * filename, int grid[]);
+extern void printGrid(int grid[]);
 extern int getNumberFromGrid(int row, int col, int * grid);
 
 int main(int argc, char * argv[]){
 	
-	char grid[81];
+	char charGrid[81];
+	int grid[81];
 	
-	readInFile("puzzle.txt", grid);
+	readInFile("puzzle.txt", grid);	
 	
 	printGrid(grid);
 	
@@ -19,15 +20,28 @@ int main(int argc, char * argv[]){
 	return 0;
 }
 
-int* convertToInt(){
-
-	int * newGrid;
+void convertToInt(int grid[], char charGrid[]){
 	
-	return newGrid;
+	for(int i = 0; i < 9; i++){
+		for(int j = 0; j < 9; j++){
+			int index = ((i * 9) +j);
+			if(charGrid[index] == ' '){
+				printf("-1\t");
+				grid[index] = -1;
+			}
+			else{
+				printf("%c\t", charGrid[index]);
+				int temp = charGrid[index];
+				printf("%d\t", temp);
+				grid[index] = charGrid[index];
+			}
+  		}
+  		printf("\n");
+  	}
 
 }
 
-char * readInFile(char * filename, char grid[]){
+void readInFile(char * filename, int grid[]){
 
 	FILE * puzzle;
 	puzzle = fopen("puzzle.txt", "r");
@@ -38,28 +52,30 @@ char * readInFile(char * filename, char grid[]){
 			if(c == '\n')
 				c = getc(puzzle);
 			int index = ((i * 9) +j);
-			grid[index] = c;
+			char str[2];
+ 			str[0] = c;
+			str[1] = '\0';
+ 			grid[index] = (int) strtol(str, NULL, 10);
   		}
   	}
-  	
-  	return grid;
-
 }
 
-void printGrid(char* grid){
+void printGrid(int grid[]){
 
 	for(int i = 0; i < 9; i++){
 		for(int j = 0; j < 9; j++){
 			int index = ((i * 9) +j);
-			printf("%c", grid[index]);
+			printf("%d", grid[index]);
 		}
 		printf("\n");
 	}
 }
 
-int getNumberFromGrid(int row, int col, int * grid){
+int getNumberFromGrid(int row, int col, int grid[]){
 	
 	int ret;
+	
+	int index = ((row * 9) + col);
 	
 	return ret;
 	
