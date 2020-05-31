@@ -8,7 +8,7 @@ void printGrid(int grid[]);
 int getNumberFromGrid(int row, int col, int * grid);
 bool legalNumber(int row, int col, int grid[], int num);
 bool inRow(int row, int grid[], int num);
-bool inCollum(int col, int grid[], int num);
+bool incolumns(int col, int grid[], int num);
 bool inSquare(int row, int col, int grid[], int num);
 bool isComplete(int grid[]);
 bool solveSudoku(int grid[]);
@@ -78,7 +78,7 @@ int getNumberFromGrid(int row, int col, int grid[]){
 
 bool legalNumber(int row, int col, int grid[], int num){
 	
-	if(!inRow(row, grid, num) && !inCollum(col, grid, num) && !inSquare(row, col, grid, num))
+	if(!inRow(row, grid, num) && !incolumns(col, grid, num) && !inSquare(row, col, grid, num))
 		return true;
 	else
 		return false;
@@ -98,7 +98,7 @@ bool inRow(int row, int grid[], int num){
 
 }
 
-bool inCollum(int col, int grid[], int num){
+bool incolumns(int col, int grid[], int num){
 
 	int tempCol = col;
 

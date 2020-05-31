@@ -11,6 +11,6 @@ to run on linux use the ./solver command in the terminal once compiled to run
 
 The format for creating a puzzle that this program can handle is in puzzle.txt
 
-where there are 9 rows and 9 collums all together with a newline after the nine numbers
+where there are 9 rows and 9 columns all together with a newline after the nine numbers
 with Zeroes as spaces.
 
