@@ -6,7 +6,7 @@
 extern void readInFile(char * filename, int grid[]);
 extern void printGrid(int grid[]);
 extern int getNumberFromGrid(int row, int col, int * grid);
-extern bool legalNumber(int row, int col, int grid[]);
+extern bool legalNumber(int row, int col, int grid[], int num);
 bool inRow(int row, int grid[], int num);
 bool inCollum(int col, int grid[], int num);
 bool inSquare(int row, int col, int grid[], int num);
@@ -20,9 +20,12 @@ int main(int argc, char * argv[]){
 	
 	printGrid(grid);
 	
-	bool result = inCollum(5, grid, 5);
-	
-	printf("\nResult: %d\n", result);
+	int result = inSquare(8, 8, grid, 5);
+
+	if(result == 1)
+		printf("TRUE\n");
+	if(result == 0)
+		printf("FALSE\n");
 
 	return 0;
 }
@@ -69,11 +72,11 @@ int getNumberFromGrid(int row, int col, int grid[]){
 	
 }
 
-bool legalNumber(int row, int col, int grid[]){
+bool legalNumber(int row, int col, int grid[], int num){
 	int index = ((row * 9) + col);
 	int num = grid[index];
 	
-	if(!inRow && !inCollum && !inSquare)
+	if(!inRow(row, grid, num) && !inCollum(col, grid, num) && !inSquare(row, col, grid, num))
 		return true;
 	else
 		return false;
@@ -109,7 +112,30 @@ bool inCollum(int col, int grid[], int num){
 
 bool inSquare(int row, int col, int grid[], int num){
 	
+	int rowStart, colStart;
 	
+	if(row < 3)
+		rowStart = 0;
+	else if(row < 6)
+		rowStart = 3;
+	else
+		rowStart = 6;
+	if(col < 3)
+		colStart = 0;
+	else if(col < 6)
+		colStart = 3;
+	else
+		colStart = 6;
+	int index = ((rowStart * 9) + colStart);
+		
+	for(int i = 0; i < 3; i++){
+		for(int j = 0; j < 3; j++){
+			if(grid[index] == num)
+				return true;
+			index++;
+		}
+		index = index + 6;
+	}
 	return false;
 }
 
