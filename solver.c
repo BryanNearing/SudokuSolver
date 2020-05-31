@@ -18,7 +18,11 @@ int main(int argc, char * argv[]){
 	
 	readInFile("puzzle.txt", grid);	
 	
-	//printGrid(grid);
+	printGrid(grid);
+	
+	//bool result = inRow(5, grid, 2);
+	
+	//printf("\nResult: %d\n", result);
 
 	return 0;
 }
@@ -78,8 +82,11 @@ bool legalNumber(int row, int col, int grid[]){
 
 bool inRow(int row, int grid[], int num){
 
-	for(int i = 0; i < 9; i++){
+	int startOfRow = row * 9;
 	
+	for(int i = 0; i < 9; i++){
+		if(grid[startOfRow + i] == num)
+			return true;
 	}
 	
 	return false;
@@ -88,7 +95,12 @@ bool inRow(int row, int grid[], int num){
 
 bool inCollum(int col, int grid[], int num){
 
+	int tempCol = col;
+
 	for(int i = 0; i < 9; i++){
+		if(grid[col] == num)
+			return true;
+		tempCol = tempCol + 9;
 	
 	}
 	
