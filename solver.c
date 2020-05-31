@@ -1,10 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 extern void readInFile(char * filename, int grid[]);
 extern void printGrid(int grid[]);
 extern int getNumberFromGrid(int row, int col, int * grid);
+extern bool legalNumber(int row, int col, int grid[]);
+bool inRow(int row, int grid[], int num);
+bool inCollum(int col, int grid[], int num);
+bool inSquare(int row, int col, int grid[], int num);
 
 int main(int argc, char * argv[]){
 	
@@ -59,3 +64,57 @@ int getNumberFromGrid(int row, int col, int grid[]){
 	return ret;
 	
 }
+
+bool legalNumber(int row, int col, int grid[]){
+	int index = ((row * 9) + col);
+	int num = grid[index];
+	
+	if(!inRow && !inCollum && !inSquare)
+		return true;
+	else
+		return false;
+	
+}
+
+bool inRow(int row, int grid[], int num){
+
+	for(int i = 0; i < 9; i++){
+	
+	}
+	
+	return false;
+
+}
+
+bool inCollum(int col, int grid[], int num){
+
+	for(int i = 0; i < 9; i++){
+	
+	}
+	
+	return false;
+}
+
+bool inSquare(int row, int col, int grid[], int num){
+	
+	
+	return false;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
