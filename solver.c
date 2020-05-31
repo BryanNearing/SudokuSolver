@@ -13,8 +13,7 @@ int main(int argc, char * argv[]){
 	
 	readInFile("puzzle.txt", grid);	
 	
-	printGrid(grid);
-	
+	//printGrid(grid);
 
 	return 0;
 }
@@ -54,6 +53,8 @@ int getNumberFromGrid(int row, int col, int grid[]){
 	int ret;
 	
 	int index = ((row * 9) + col);
+	
+	ret = grid[index];
 	
 	return ret;
 	
