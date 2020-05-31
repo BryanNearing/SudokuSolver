@@ -3,13 +3,17 @@
 #include <string.h>
 #include <stdbool.h>
 
-extern void readInFile(char * filename, int grid[]);
-extern void printGrid(int grid[]);
-extern int getNumberFromGrid(int row, int col, int * grid);
-extern bool legalNumber(int row, int col, int grid[], int num);
+void readInFile(char * filename, int grid[]);
+void printGrid(int grid[]);
+int getNumberFromGrid(int row, int col, int * grid);
+bool legalNumber(int row, int col, int grid[], int num);
 bool inRow(int row, int grid[], int num);
 bool inCollum(int col, int grid[], int num);
 bool inSquare(int row, int col, int grid[], int num);
+bool isComplete(int grid[]);
+bool solveSudoku(int grid[]);
+bool notZero(int row, int col, int grid[]);
+bool isPositionZero(int grid[], int * row, int * col);
 
 int main(int argc, char * argv[]){
 	
@@ -20,12 +24,12 @@ int main(int argc, char * argv[]){
 	
 	printGrid(grid);
 	
-	int result = inSquare(8, 8, grid, 5);
-
-	if(result == 1)
-		printf("TRUE\n");
-	if(result == 0)
-		printf("FALSE\n");
+	printf("\n");
+	
+	solveSudoku(grid);
+	
+	printGrid(grid);
+	
 
 	return 0;
 }
@@ -33,7 +37,7 @@ int main(int argc, char * argv[]){
 void readInFile(char * filename, int grid[]){
 
 	FILE * puzzle;
-	puzzle = fopen("puzzle.txt", "r");
+	puzzle = fopen(filename, "r");
 	char c;
 	for(int i = 0; i < 9; i++){
 		for(int j = 0; j < 9; j++){
@@ -73,8 +77,6 @@ int getNumberFromGrid(int row, int col, int grid[]){
 }
 
 bool legalNumber(int row, int col, int grid[], int num){
-	int index = ((row * 9) + col);
-	int num = grid[index];
 	
 	if(!inRow(row, grid, num) && !inCollum(col, grid, num) && !inSquare(row, col, grid, num))
 		return true;
@@ -138,6 +140,56 @@ bool inSquare(int row, int col, int grid[], int num){
 	}
 	return false;
 }
+
+bool isComplete(int grid[]){
+
+	for(int i = 0; i < 9; i++){
+		for(int j = 0; j < 9; j++){
+			int index = ((i * 9) +j);
+			if(grid[index] == 0)
+				return false;
+		}
+	}
+	
+	return true;
+
+}
+
+bool solveSudoku(int grid[]){
+
+	int row, col;
+	
+	if (!isPositionZero(grid, &row, &col)) 
+        	return true; 
+		
+	for (int num = 1; num <= 9; num++) {
+		if(legalNumber(row, col, grid, num)){
+			int index = ((row * 9) + col);
+			grid[index] = num;
+				
+			if(solveSudoku(grid))
+				return true;
+				
+			grid[index] = 0;
+		}
+	}
+	
+	
+	
+	return false;
+
+}
+
+bool isPositionZero(int grid[], int * row, int * col){ 
+    for ((*row) = 0; (*row) < 9; (*row)++){
+        for ((*col) = 0; (*col) < 9; (*col)++){
+        	int index = (((*row) * 9) + (*col));	
+        	if (grid[index] == 0) 
+               	return true; 
+        }
+    }
+    return false; 
+} 
 
 
 
